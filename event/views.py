@@ -73,7 +73,7 @@ class HomeView(TemplateView):
 		context['q_no'] = q_no
 		context['images_list'] = question.image.all()
 		context['images'] = image_no
-		context['end_time'] = end_time
+		context['end_time'] = end_time.time
 		return context
 
 	def get(self, request, q_no, **kwargs):
