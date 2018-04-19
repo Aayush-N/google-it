@@ -1,4 +1,5 @@
 <html>
+{% load static %}
 <head>
     <title>Google-it</title>
     {% include 'headers.html' %}
@@ -88,7 +89,9 @@ body{
     <div class="container">
         <form method="POST" action="{% url 'question' q_no=q_no %}">
             {% csrf_token %}
-            <br><br>
+            {% for i in images_list %}
+                <img src="https://cdn.bmsit.ac.in/googleit/media/{{i.document}}" width="400px" height="400px">
+            {% endfor %}
             <div class="field">
               <div class="control">
                 <input class="input is-primary" type="text" id="ansForm", name='answer', autocomplete="off", required="True" placeholder='Your Answer?'>

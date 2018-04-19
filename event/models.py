@@ -21,7 +21,7 @@ class Question(models.Model):
 	description = models.CharField("Question description", max_length=100)
 	question_no = models.IntegerField(default=1)
 	no_of_images = models.IntegerField(default=1)
-	document = models.FileField(upload_to='images/', default='..img/default.jpg')
+	image = models.ManyToManyField('ImageModel')
 	answer = models.CharField("Answer to the question", max_length=50)
 
 	def __str__(self):
@@ -50,3 +50,10 @@ class GameTime(models.Model):
 	
 	def __str__(self):
 		return self.user.username
+
+class ImageModel(models.Model):
+	document = models.FileField(upload_to='images/', default='..img/default.jpg')
+	question_no = models.IntegerField(default=1)
+
+	def __str__(self):
+		return str('Question ' + str(self.question_no))

@@ -66,9 +66,12 @@ class HomeView(TemplateView):
 		end_time = game_time.end_time
 		question = Question.objects.filter(question_no=q_no).first()
 		print(q_no,'asas')
+		for i in question.image.all():
+			print(i.document)
 		image_no = question.no_of_images
 		context['form'] = form
 		context['q_no'] = q_no
+		context['images_list'] = question.image.all()
 		context['images'] = image_no
 		context['end_time'] = end_time
 		return context

@@ -36,10 +36,17 @@ class GameTimeAdmin(admin.ModelAdmin):
 	def user_function(self, instance):
 		return instance.user.username
 
+@admin.register(ImageModel)
+class ImageModelAdmin(admin.ModelAdmin):
+	list_display = ('question_no',)
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-	list_display = ('description','question_no')
+	list_display = ('question_no', 'text')
 	search_fields = ('description', 'question_no')
+	def text(self, instance):
+		return instance.description
 
 @admin.register(UserAnswers)
 class UserAnswersAdmin(admin.ModelAdmin):
