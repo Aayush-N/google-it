@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Google-it</title>
+    {% include 'headers.html' %}
+</head>
+<body>
+    <div class="container" id = "landing">
+        <div class="columns">
+            <div class="column is-8 is-offset-2">
+                {% include 'rules.html' %}
+                <a class="button is-primary is-large" href="{{ url_for('question',q_no=next_question) }}">Start</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

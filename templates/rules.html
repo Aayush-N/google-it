@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Rules</title>
+    {% include 'headers.html' %}
+</head>
+
+<body>
+    <div class="content">
+        <h2>Rules</h2>
+        <ol>
+            <li>Questions are in the form of a puzzle.</li>
+            <li>Find the relationship between images using any search engine of your choice.</li>
+            <li>Example:</li>
+            <img src="{{ url_for('static',filename='assets/rahul.jpg') }}" width="300px" height="300px">
+            <img src="{{ url_for('static',filename='assets/street.jpg') }}" width="300px" height="300px">
+            <p><strong>Answer = Wall Street </strong></p>
+            <p>Reason: Rahul Dravid also is known as THE WALL and the second picture is a BUSY STREET.</p>
+            <li>Wait for the volunteer's instuctions to finish, Once done you may begin with the competetion.</li>
+        </ol>
+
+    </div>
+</body>
+</html>

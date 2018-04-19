@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>
+		Google-it
+	</title>
+	{% include 'headers.html' %}
+</head>
+<body style="text-align:center;">
+	<img src="{{ url_for('static',filename='assets/utsaha.png') }}" >
+	<p class="title">Google-It</p><br><br>
+	<a class="button is-large" href="{{ url_for('register') }}" style="background-color:#b71c1c;color:#fff;">Register</a><br><br>
+	<img src="https://utsaha.bmsit.ac.in/assets/images/tfsc-plain-svg.svg" width="350px" height="300px">
+</body>
+</html>

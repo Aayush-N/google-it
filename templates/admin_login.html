@@ -1,0 +1,68 @@
+<html>
+<head>
+	{% include 'headers.html' %}
+	<title>
+		LOGIN
+	</title>
+</head>
+<body>
+	<nav class="nav has-shadow">
+		<div class="nav-left">
+			<a class="nav-item">
+				Google It
+			</a>
+		</div>
+		<div class="nav-right">
+			<a class="nav-item is-tab" href="{{ url_for('register') }}">
+				Register
+			</a>
+			<a class="nav-item is-tab" href="{{ url_for('login') }}">
+				Login
+			</a>
+		</div>
+	</nav>
+
+	<div class="container">
+	    <div class="columns	">
+	        <div class="column is-offset-3 is-half">
+                <p class="title">Admin Login</p>
+				<div class="box" id="loginForm">
+						<form method="POST" action="{{url_for('admin') }}">
+							{{ form.csrf_token }}
+							<div class="field">
+								{{ form.username(placeholder='Username') }}
+								{% if form.username.errors %}
+							    	{% for error in form.username.errors %}
+										<div class="notification is-danger">
+											<button class="delete"></button>
+											 {{ error }}
+											</div>{% endfor %}
+							   		{% endif %}
+							</div>
+							<div class="field">
+								{{ form.password(placeholder='Password') }}
+								{% if form.password.errors %}
+									{% for error in form.password.errors %}
+										<div class="notification is-danger">
+											<button class="delete"></button>
+											 {{ error }}
+											</div>{% endfor %}
+									{% endif %}
+							</div>
+								<input type="submit" value="Login" class="button is-success">
+						</form>
+					</p>
+					{% for msg in get_flashed_messages() %}
+					<div class="notification is-warning">
+						<button class="delete"></button>
+						{{ msg }} <br>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

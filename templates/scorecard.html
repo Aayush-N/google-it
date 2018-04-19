@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Google-it</title>
+    {% include 'headers.html' %}
+</head>
+<body>
+    {% include 'admin_nav.html' %}
+    <div class="columns" style="margin-top:30px;">
+        <div class="column is-6 is-offset-3">
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Points</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                    {% for u in users %}
+                        {% for t in time %}
+                        <tr>
+                            {% if u.id == t.user_id %}
+                                {% if u.last_answered_time != None and t.start_time != None  %}
+                                    <td>{{ u.username }}</td>
+                                    <td>{{ u.answered }}</td>
+                                    <td>{{ u.last_answered_time - t.start_time }}</td>
+                                {% endif %}    
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

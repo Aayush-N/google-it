@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Google-it</title>
+    {% include 'headers.html' %}
+</head>
+<body>
+    <nav class="nav has-shadow">
+		<div class="nav-left">
+			<a class="nav-item">
+				Google It
+			</a>
+		</div>
+		<div class="nav-right">
+			<a class="nav-item is-tab" href="{{ url_for('logout') }}">
+				Logout
+			</a>
+		</div>
+	</nav>
+    <div class="columns">
+        <div class="column is-6 is-offset-3">
+            <p class="title">Thank you! Our volunteers will contact you.</p>
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Your Answer</th>
+
+                    </tr>
+                </thead>
+                    {% for a in my_answers %}
+                    <tr>
+                        <td>{{ a.q_no }}</td>
+                        <td>{{ a.answer }}</td>
+                    </tr>
+                    {% endfor %}
+
+            </table>
+            {% for p in points %}
+                <br>
+                <p class="title">Points = {{ p.answered }}</p>
+
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

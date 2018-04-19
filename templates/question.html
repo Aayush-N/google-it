@@ -1,0 +1,104 @@
+<html>
+<head>
+    <title>Google-it</title>
+    {% include 'headers.html' %}
+</head>
+<body>
+    <br><br>
+    <div id="end" hidden="True">{{ end }}</div>
+    <div class="columns">
+        <div class="column is-4 is-offset-4">
+            <article class="message is-info">
+                <div class="message-header">Time Remaining</div>
+                <div id="current" class="message-body"></div>
+            </article>
+        </div>
+    </div>
+    <div class="container">
+                <form method="POST" action="{% url 'question' q_no=q_no %}">
+                    {{form.csrf_token}}
+
+                    <br><br>
+                    <input id="ansForm", autocomplete="off", required="True" placeholder='Your Answer?'/>
+                    <br>
+                    <input type="submit" value="Submit" class="button is-success" style="margin-top:10px;">
+                </form>
+                <div class="columns">
+                    <div class="column is-6 is-offset-3">
+                        {% for message in messages %}
+                        <div class="notification is-warning">
+                            <button class="delete"></button>
+                    		{{ msg }} <br>
+                        </div>
+                    	{% endfor %}
+                    </div>
+                </div>
+</body>
+<script>
+var time = 0;
+
+
+var currentdate = new Date();
+
+
+
+var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+//var current = document.getElementById('current');
+//current.innerHTML = datetime;
+
+var timer = 0;
+
+function display_time(){
+    var currentdate = new Date();
+    var endTime = document.getElementById('end');
+    var end =endTime.innerHTML.toString();
+    end = end.split(" ");
+    end = end[1].split(":");
+    var hour = end[0];
+    var min = end[1];
+    var sec = end[2];
+    var hourDiff = Number(hour) - Number(currentdate.getHours());
+    var minDiff = Number(min)- Number(currentdate.getMinutes());
+    var secDiff = Number(sec)- Number(currentdate.getSeconds());
+    console.log("hr = "+hourDiff.toString()+" "+currentdate.getHours().toString());
+    console.log("mn = "+minDiff.toString()+" "+currentdate.getMinutes().toString());
+    console.log("sec = "+secDiff.toString()+" "+currentdate.getSeconds().toString());
+
+    if(secDiff <= 0 && minDiff <= 0 && hourDiff <= 0){
+       window.location = '/finish';
+    }
+
+    if(secDiff < 0 ){
+        secDiff = 60+secDiff;
+        minDiff--;
+    }
+    if(minDiff < 0 ){
+        minDiff = 60+minDiff;
+        hourDiff--;
+    }
+
+    if(hourDiff < 0){
+       window.location = '/finish';
+    }
+
+    var time = hourDiff+":"+minDiff+":"+secDiff;
+    console.log("time"+time);
+    var current = document.getElementById('current');
+    current.innerHTML = time;
+
+    //console.log(time);
+
+}
+function initTime(){
+
+    display_time();
+    var interval  = setInterval(display_time,1000);
+}
+initTime();
+</script>
+</html>
