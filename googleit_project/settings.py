@@ -38,6 +38,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'mw7@-ny1yv0#ie)5o0gqb(x3wz4$mr$c21=x@zajhzk^6y+&)o'
 
 
+LOGIN_REDIRECT_URL = '/rules'
 
 ALLOWED_HOSTS = ['*']
 
