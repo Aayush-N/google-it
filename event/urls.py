@@ -8,7 +8,7 @@ from . import forms
 from . import views
 
 urlpatterns = [
-    url(r'^/$', RedirectView.as_view(url='/login')),
+    url(r'^$', RedirectView.as_view(url='/login')),
     url(r'^question/(?P<q_no>[-\w]+)', views.HomeView.as_view(), name='question'),
     url(r'^login/', login, {'template_name': 'login.html','authentication_form': forms.LoginForm}, name='login'),
     url(r'^logout/$', logout, {'next_page': '/exit'}, name='logout'),
