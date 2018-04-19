@@ -1,0 +1,30 @@
+#landing {
+    padding-top: 50px;
+
+}
+.content {
+    text-align: left;
+}
+#add{
+    background-color: blue;
+    padding: 5px;
+    margin: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+img {
+    padding-top: 30px !important;
+    margin-top: 20px;
+}
+
+#ansForm {
+    margin-top: 10px;
+}
+
+body{
+    text-align: center;
+}
+
+#loginForm, #registerForm{
+    margin-top: 30px;
+}

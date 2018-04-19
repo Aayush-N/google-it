@@ -1,23 +1,51 @@
-<html>
+{% load static %}
+<!DOCTYPE HTML5>
 <head>
-	<title>Rules</title>
-    {% include 'headers.html' %}
+  {% include 'headers.html' %}
+  <title>STOP</title>
 </head>
-
 <body>
-    <div class="content">
-        <h2>Rules</h2>
-        <ol>
-            <li>Questions are in the form of a puzzle.</li>
-            <li>Find the relationship between images using any search engine of your choice.</li>
-            <li>Example:</li>
-            <img src="{{ url_for('static',filename='assets/rahul.jpg') }}" width="300px" height="300px">
-            <img src="{{ url_for('static',filename='assets/street.jpg') }}" width="300px" height="300px">
+  <section class="hero is-success is-fullheight">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <header class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <p>Google It</p>
+          </a>
+          
+          <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroC" class="navbar-menu">
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Rules
+      </h1>
+      <p>Questions are in the form of a puzzle.</p>
+            <p>Find the relationship between images using any search engine of your choice.</p>
+            <p>Example:</p>
+           <img src="https://cdn.bmsit.ac.in/googleit/static/rahul.jpg" width="300px" height="300px">
+            <img src="https://cdn.bmsit.ac.in/googleit/static/street.jpeg" width="300px" height="300px">
+            
             <p><strong>Answer = Wall Street </strong></p>
             <p>Reason: Rahul Dravid also is known as THE WALL and the second picture is a BUSY STREET.</p>
-            <li>Wait for the volunteer's instuctions to finish, Once done you may begin with the competetion.</li>
+            <p>Wait for the volunteer's instuctions to start, Once done you may begin with the competetion.</p>
         </ol>
-
+        <br>
+      <a href='/start' class="button is-info">Begin / Resume</a>
     </div>
+  </div>
+</section>
 </body>
-</html>

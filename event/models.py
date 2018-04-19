@@ -21,6 +21,7 @@ class Question(models.Model):
 	description = models.CharField("Question description", max_length=100)
 	question_no = models.IntegerField(default=1)
 	no_of_images = models.IntegerField(default=1)
+	document = models.FileField(upload_to='images/', default='..img/default.jpg')
 	answer = models.CharField("Answer to the question", max_length=50)
 
 	def __str__(self):

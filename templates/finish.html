@@ -11,7 +11,7 @@
 			</a>
 		</div>
 		<div class="nav-right">
-			<a class="nav-item is-tab" href="{{ url_for('logout') }}">
+			<a class="nav-item is-tab" href="{% url 'logout' %}">
 				Logout
 			</a>
 		</div>
@@ -29,17 +29,14 @@
                 </thead>
                     {% for a in my_answers %}
                     <tr>
-                        <td>{{ a.q_no }}</td>
+                        <td>{{ a.question.description }}</td>
                         <td>{{ a.answer }}</td>
                     </tr>
                     {% endfor %}
 
             </table>
-            {% for p in points %}
                 <br>
-                <p class="title">Points = {{ p.answered }}</p>
-
-            {% endfor %}
+                <p class="title">Your Points = {{ points }}</p>
         </div>
     </div>
 </body>

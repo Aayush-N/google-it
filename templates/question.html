@@ -2,10 +2,81 @@
 <head>
     <title>Google-it</title>
     {% include 'headers.html' %}
+    <style type="text/css">
+        #landing {
+    padding-top: 50px;
+
+}
+.content {
+    text-align: left;
+}
+#add{
+    background-color: blue;
+    padding: 5px;
+    margin: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+img {
+    padding-top: 30px !important;
+    margin-top: 20px;
+}
+
+#ansForm {
+    margin-top: 10px;
+}
+
+body{
+    text-align: center;
+}
+
+#loginForm, #registerForm{
+    margin-top: 30px;
+}
+
+    </style>
 </head>
 <body>
+    <nav class="navbar is-transparent">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Bulma: a modern CSS framework based on Flexbox" >
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/rules">
+        Rules
+      </a>
+      
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-primary" href="/logout">
+              <span class="icon">
+                <i class="fas fa-sign-out-alt"></i>
+              </span>
+              <span>Logout</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
     <br><br>
-    <div id="end" hidden="True">{{ end }}</div>
+    <div id="end" hidden="true">{{ end_time }}</div>
     <div class="columns">
         <div class="column is-4 is-offset-4">
             <article class="message is-info">
@@ -15,17 +86,20 @@
         </div>
     </div>
     <div class="container">
-                <form method="POST" action="{% url 'question' question_no=q_no %}">
-                    {{form.csrf_token}}
+        <form method="POST" action="{% url 'question' q_no=q_no %}">
+            {% csrf_token %}
+            <br><br>
+            <div class="field">
+              <div class="control">
+                <input class="input is-primary" type="text" id="ansForm", name='answer', autocomplete="off", required="True" placeholder='Your Answer?'>
+              </div>
+            </div>
+            <br>
+            <input type="submit" value="Submit" class="button is-success" style="margin-top:10px;">
+        </form>
+        <div class="columns">
 
-                    <br><br>
-                    <input id="ansForm", autocomplete="off", required="True" placeholder='Your Answer?'/>
-                    <br>
-                    <input type="submit" value="Submit" class="button is-success" style="margin-top:10px;">
-                </form>
-                <div class="columns">
-
-                </div>
+        </div>
 </body>
 <script>
 var time = 0;

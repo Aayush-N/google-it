@@ -47,8 +47,8 @@ class UserAnswersAdmin(admin.ModelAdmin):
 	search_fields = ('question_function', 'user_function')
 
 	def question_function(self, instance):
-		return instance.question_no
+		return instance.question.question_no
 
 	def user_function(self, instance):
-		return instance.username
+		return instance.user.username
 
