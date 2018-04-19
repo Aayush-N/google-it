@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="container">
-                <form method="POST" action="{% url 'question' q_no=q_no %}">
+                <form method="POST" action="{% url 'question' question_no=q_no %}">
                     {{form.csrf_token}}
 
                     <br><br>

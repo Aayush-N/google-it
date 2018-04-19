@@ -57,11 +57,12 @@ class HomeView(TemplateView):
 
 
 	def get_context_data(self,q_no, **kwargs):
-
+		context = super(HomeView, self).get_context_data(**kwargs)
 		form = AnswerForm()
 		game_time = GameTime.objects.filter(user__username = self.request.user.username).first()
 		end = game_time.end_time
-		question = Question.objects.filter(question_no=q_no)
+		question = Question.objects.filter(question_no=q_no).first()
+		print(question.no_of_images)
 		image_no = question.no_of_images
 		context['form'] = form
 		context['q_no'] = q_no
@@ -71,16 +72,17 @@ class HomeView(TemplateView):
 
 	def get(self, request, q_no, **kwargs):
 		context = self.get_context_data(q_no,**kwargs)
-
+		print(q_no)
 		user = self.request.user
 		check_point = self._fetch_question_no()
-		if check_point != (q_no):
-			return "Forbidden"
+		print(check_point)
+		if int(check_point) != int(q_no):
+			return redirect('/admin')
 		else:
 			if q_no == 1:
 				time = GameTime.objects.filter(user = user).update(start_time=datetime.now()+timedelta(hours=5,minutes=30), end_time = (datetime.now()+timedelta(hours=5,minutes=30)) + timedelta(hours = time_interval))
-
-			next_question = fetch_question_no()
+				print('here')
+			next_question = self._fetch_question_no()
 
 			if next_question == (self.max_questions):
 				return redirect('/finish')
