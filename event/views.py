@@ -57,8 +57,20 @@ class HomeView(TemplateView):
 
 
 	def get_context_data(self,q_no, **kwargs):
-		context = super(HomeView, self).get_context_data(**kwargs)
-		
+
+		form = AnswerForm()
+		game_time = GameTime.objects.filter(user__username = self.request.user.username).first()
+		end = game_time.end_time
+		question = Question.objects.filter(question_no=q_no)
+		image_no = question.no_of_images
+		context['form'] = form
+		context['q_no'] = q_no
+		context['images'] = image_no
+		context['end'] = end
+		return context
+
+	def get(self, request, q_no, **kwargs):
+		context = self.get_context_data(q_no,**kwargs)
 
 		user = self.request.user
 		check_point = self._fetch_question_no()
@@ -66,25 +78,17 @@ class HomeView(TemplateView):
 			return "Forbidden"
 		else:
 			if q_no == 1:
-				time = GameTime.filter_by(user = user).update(start_time=datetime.now()+timedelta(hours=5,minutes=30), end_time = (datetime.now()+timedelta(hours=5,minutes=30)) + timedelta(hours = time_interval))
-			form = AnswerForm()
-			game_time = GameTime.filter_by(user = user)
-			end = game_time.end_time
-			image_no = Questions.filter_by(q_no=q_no).all()
-			for num in image_no:
-				images = num.no_of_images
-				next_question = fetch_question_no()
-				if next_question == (self.max_questions):
-					return redirect('/finish')
-				context['form'] = form
-				context['q_no'] = q_no
-				context['images'] = int(images)
-				context['end'] = end
-			return context
+				time = GameTime.objects.filter(user = user).update(start_time=datetime.now()+timedelta(hours=5,minutes=30), end_time = (datetime.now()+timedelta(hours=5,minutes=30)) + timedelta(hours = time_interval))
+
+			next_question = fetch_question_no()
+
+			if next_question == (self.max_questions):
+				return redirect('/finish')
+		return render(request, self.template_name)
 
 	def post(self, request, *args, **kwargs):
 		user_answer = form.answer.data
-		ans = Questions.query.filter_by(q_no=q_no).all()
+		ans = Questions.query.objects.filter(q_no=q_no).all()
 		answer_from_user = UserAnswers(q_no,session['uid'],user_answer)
 		db.session.add(answer_from_user)
 		db.session.commit()
@@ -95,7 +99,7 @@ class HomeView(TemplateView):
 			user = self.request.user
 			points = user.answered
 			points +=1 
-			User.filter_by(username = user.username).update(answered = points, last_answered_time=datetime.now()+timedelta(hours=5,minutes=30))
+			User.objects.filter(username = user.username).update(answered = points, last_answered_time=datetime.now()+timedelta(hours=5,minutes=30))
 			next_question = fetch_question_no()
 			if next_question == (self.max_questions):
 				return redirect('/finish')

@@ -34,7 +34,7 @@ class GameTimeAdmin(admin.ModelAdmin):
 	search_fields = ('user_function',)
 
 	def user_function(self, instance):
-		return instance.username
+		return instance.user.username
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
