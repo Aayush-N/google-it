@@ -79,12 +79,7 @@ body{
     <br><br>
     <div id="end_time" >{{ end_time }}</div>
     <div class="columns">
-        <div class="column is-4 is-offset-4">
-            <article class="message is-info">
-                <div class="message-header">Time Remaining</div>
-                <div id="current" class="message-body"></div>
-            </article>
-        </div>
+        <p>{{description}}</p>
     </div>
     <div class="container">
         <form method="POST" action="{% url 'question' q_no=q_no %}">

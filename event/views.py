@@ -70,6 +70,7 @@ class HomeView(TemplateView):
 			print(i.document)
 		image_no = question.no_of_images
 		context['form'] = form
+		context['description'] = question.description
 		context['q_no'] = q_no
 		context['images_list'] = question.image.all()
 		context['images'] = image_no
@@ -101,8 +102,10 @@ class HomeView(TemplateView):
 		question = Question.objects.filter(question_no=q_no).first()
 		answer_from_user = UserAnswers.objects.update_or_create(question=question,user=self.request.user,answer=user_answer.upper())
 		answer_given = UserAnswers.objects.filter(question=question,user=self.request.user)
-		print(answer_given[0].answer)
-		if question.answer.upper() == answer_given[0].answer:
+		print(question.answer.upper())
+		print(answer_given[0].answer.upper())
+		if question.answer.upper() == answer_given[0].answer.upper():
+			print('sbdjsbdjsbdjsdbsjbdsbjsd')
 			answered = self.request.user.answered
 			update_score = User.objects.filter(username = self.request.user.username).update(answered = answered+1 , last_answered_time=datetime.now())
 			next_question = self._fetch_question_no()
